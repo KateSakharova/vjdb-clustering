@@ -1,5 +1,6 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl=2
+nextflow.enable.types = true
 
 /*
  * VJDB Sequence Clustering Pipeline

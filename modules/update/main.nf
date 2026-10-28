@@ -29,6 +29,12 @@ process PREPARE_UPDATE {
         --existing-csv ${existing_csv} \
         --outdir .
     """
+
+    stub:
+    """
+    echo "" | gzip > combined_for_vclust.fna.gz
+    echo "vjdb_id,copy_of,seq_gc,seq_len,seq_hash" > new_hashed_reps.csv
+    """
 }
 
 process FINALIZE_UPDATE {
@@ -64,5 +70,12 @@ process FINALIZE_UPDATE {
         --existing-csv ${existing_csv} \
         --combined-fasta ${combined_fasta} \
         --output-prefix ${prefix}
+    """
+
+    stub:
+    """
+    echo "vjdb_id,copy_of,seq_gc,seq_len,seq_hash,cluster_rep" > ${prefix}_merged_reps.csv
+    echo "" | gzip > ${prefix}_merged_reps.fna.gz
+    touch ${prefix}_new_clusters.csv ${prefix}_cluster_events.tsv
     """
 }

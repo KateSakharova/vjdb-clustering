@@ -23,6 +23,11 @@ process EXTRACT_MERGE_CHUNK_REPS {
         --rep-fastas ${rep_fastas.join(' ')} \
         -o vjdb1_vclust_reps_merged.fna.gz
     """
+
+    stub:
+    """
+    echo "" | gzip > vjdb1_vclust_reps_merged.fna.gz
+    """
 }
 
 process MERGE_FINAL_CLUSTERS {
@@ -52,6 +57,11 @@ process MERGE_FINAL_CLUSTERS {
         --chunk-linclusts ${chunk_linclust_tsvs.join(' ')} \
         -o vjdb1_merged_reps.csv
     """
+
+    stub:
+    """
+    echo "vjdb_id,copy_of,seq_gc,seq_len,seq_hash,cluster_rep" > vjdb1_merged_reps.csv
+    """
 }
 
 process EXTRACT_REPS_OF_REPS {
@@ -76,5 +86,10 @@ process EXTRACT_REPS_OF_REPS {
         --input-fasta ${merged_fasta} \
         --leiden-tsv ${leiden_tsv} \
         -o vjdb1_merged_reps.fna.gz
+    """
+
+    stub:
+    """
+    echo "" | gzip > vjdb1_merged_reps.fna.gz
     """
 }

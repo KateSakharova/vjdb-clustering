@@ -33,4 +33,11 @@ process LINCLUST {
     gzip -2 ${prefix}_linclust_rep_seq.fasta
     rm -rf tmpdir ${prefix}_linclust_all_seqs.fasta
     """
+
+    stub:
+    def prefix = chunk_fasta.simpleName
+    """
+    echo "" | gzip > ${prefix}_linclust_rep_seq.fasta.gz
+    touch ${prefix}_linclust_cluster.tsv
+    """
 }

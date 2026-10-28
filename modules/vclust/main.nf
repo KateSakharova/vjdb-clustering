@@ -59,4 +59,9 @@ process VCLUST_CLUSTER {
     mv clusterreps_leiden.tsv ${prefix}_leiden.tsv
     rm -f fltr.txt ani.tsv ani.ids.tsv
     """
+
+    stub:
+    """
+    touch ${rep_fasta.simpleName}_leiden.tsv
+    """
 }

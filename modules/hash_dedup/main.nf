@@ -23,4 +23,11 @@ process HASH_DEDUP {
     """
     1_prepare_clustering.py --input ${fasta} --outdir chunks --block-size ${block_size}
     """
+
+    stub:
+    """
+    mkdir -p chunks
+    echo "" | gzip > chunks/vjdb1_0.fna.gz
+    echo "vjdb_id,copy_of,seq_gc,seq_len,seq_hash" > chunks/vjdb1_hashed_reps.csv
+    """
 }
